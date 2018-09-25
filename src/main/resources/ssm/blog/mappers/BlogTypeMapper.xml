@@ -40,6 +40,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT COUNT(*) FROM t_blogtype
 	</select>
 	
+	<!-- 
+		// 添加博客类别
+		public Integer addBlogType(BlogType blogType); 
+	-->
 	<insert id="addBlogType" parameterType="BlogType" keyProperty="id" useGeneratedKeys="true">
 		INSERT INTO t_blogtype VALUES(null,#{typeName},#{orderNum})
 	</insert>
@@ -48,6 +52,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from t_blogtype where id=#{id}
 	</delete>
 	
+	<!--
+		// 更新博客类别
+		public Integer updateBlogType(BlogType blogType)
+	 -->
 	<update id="updateBlogType" parameterType="BlogType">
 		update t_blogtype
 		<set>

@@ -34,14 +34,12 @@ public class BlogTypeServiceImpl implements BlogTypeService{
 
 	@Override
 	public Integer addBlogType(BlogType blogType) {
-		// TODO Auto-generated method stub
-		return null;
+		return blogTypeDao.addBlogType(blogType);
 	}
 
 	@Override
 	public Integer updateBlogType(BlogType blogType) {
-		// TODO Auto-generated method stub
-		return null;
+		return blogTypeDao.updateBlogType(blogType);
 	}
 
 	@Override

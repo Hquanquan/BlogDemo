@@ -50,4 +50,29 @@ public class BlogTypeAdminController {
 		ResponseUtil.write(response, result);
 		return null;
 	}
+	
+	
+	// 添加和更新博客类别
+	@RequestMapping("/save")
+	public String save(BlogType blogType, HttpServletResponse response)
+			throws Exception {
+		
+		// 接收返回结果记录数
+		int resultTotal = 0; 
+		if (blogType.getId() == null) { // 说明是第一次插入
+			resultTotal = blogTypeService.addBlogType(blogType);
+		} else { // 有id表示修改
+			resultTotal = blogTypeService.updateBlogType(blogType);
+		}
+
+		JSONObject result = new JSONObject();
+		if (resultTotal > 0) {
+			result.put("success", true);
+		} else {
+			result.put("success", false);
+		}
+		ResponseUtil.write(response, result);
+		return null;
+	}
+
 }
