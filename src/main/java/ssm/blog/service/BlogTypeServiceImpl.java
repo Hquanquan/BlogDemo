@@ -45,7 +45,7 @@ public class BlogTypeServiceImpl implements BlogTypeService{
 	@Override
 	public Integer deleteBlogType(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return blogTypeDao.deleteBlogType(id);
 	}
 
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ssm.blog.entity.BlogType;
 import ssm.blog.entity.BlogTypeService;
 import ssm.blog.entity.PageBean;
+import ssm.blog.service.BlogService;
 import ssm.blog.util.ResponseUtil;
 
 
@@ -26,6 +27,9 @@ public class BlogTypeAdminController {
 	
 	@Autowired
 	private BlogTypeService blogTypeService;
+	
+	@Autowired
+	private BlogService blogService;
 
 	// 分页查询博客类别
 	@RequestMapping("/listBlogType")
@@ -74,5 +78,30 @@ public class BlogTypeAdminController {
 		ResponseUtil.write(response, result);
 		return null;
 	}
+	
+	
+
+	// 博客类别信息删除
+	@RequestMapping("/delete")
+	public String deleteBlog(
+			@RequestParam(value = "ids", required = false) String ids,
+			HttpServletResponse response) throws Exception {
+
+		String[] idsStr = ids.split(",");
+		JSONObject result = new JSONObject();
+		for (int i = 0; i < idsStr.length; i++) {
+			int id = Integer.parseInt(idsStr[i]);
+			if(blogService.getBlogByTypeId(id) > 0) { //说明该类别中有博客
+				result.put("exist", "该类别下有博客，不能删除!");
+			} else {
+				blogTypeService.deleteBlogType(id);
+			}		
+		}
+		result.put("success", true);
+		ResponseUtil.write(response, result);
+		return null;
+	}
+	
+
 
 }
