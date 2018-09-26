@@ -21,6 +21,9 @@ public interface BlogDao {
 	public List<Blog> listBlog(Map<String, Object> map);
 
 	public Long getTotal(Map<String, Object> map);
+
+	//根据id删除博客
+	public Integer deleteBlog(Integer id);
 	
 
 	

@@ -22,6 +22,11 @@ public interface BlogService {
 
 	public Long getTotal(Map<String, Object> map);
 
+	// 删除博客信息
+	public Integer deleteBlog(Integer id);
+
+
+
 	
 
 

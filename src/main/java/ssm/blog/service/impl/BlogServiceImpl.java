@@ -46,4 +46,9 @@ public class BlogServiceImpl implements BlogService{
 		return blogDao.getTotal(map);
 	}
 
+	@Override
+	public Integer deleteBlog(Integer id) {
+		return blogDao.deleteBlog(id);
+	}
+
 }

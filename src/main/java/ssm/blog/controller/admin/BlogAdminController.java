@@ -20,6 +20,7 @@ import ssm.blog.entity.Blog;
 import ssm.blog.entity.PageBean;
 import ssm.blog.lucene.BlogIndex;
 import ssm.blog.service.BlogService;
+import ssm.blog.service.CommentService;
 import ssm.blog.util.DateJsonValueProcessor;
 import ssm.blog.util.ResponseUtil;
 import ssm.blog.util.StringUtil;
@@ -31,6 +32,9 @@ public class BlogAdminController {
 	
 	@Autowired
 	private BlogService blogService;
+	
+	@Autowired
+	private CommentService commentService;
 	
 	private BlogIndex blogIndex=new BlogIndex();
 	
@@ -114,18 +118,20 @@ public class BlogAdminController {
 		ResponseUtil.write(response, result);
 		return null;
 	}
-	/*
-	
-	*//**博客信息删除
+	/**博客信息删除
 	 * @param ids
 	 * @param response
 	 * @return
 	 * @throws Exception
-	 *//*
+	 */
+	
 	@RequestMapping("/delete")
 	public String deleteBlog(
 			@RequestParam(value="ids", required=false)String ids,
 			HttpServletResponse response) throws Exception {
+		
+		System.out.println("deleteBlog");
+		
 		
 		String[] idsStr = ids.split(",");
 		for(int i = 0; i < idsStr.length; i++) {
@@ -137,10 +143,13 @@ public class BlogAdminController {
 		JSONObject result = new JSONObject();
 		result.put("success", true);
 		ResponseUtil.write(response, result);
+		
+		
 		return null;
+		
+		
 	}
 	
-	*/
 }	
 	
 	

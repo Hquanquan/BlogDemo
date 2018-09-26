@@ -53,6 +53,15 @@ public class BlogIndex {
 		writer.updateDocument(new Term("id", String.valueOf(blog.getId())), doc);
 		writer.close();
 	}
+
+	//删除指定博客的索引
+	public void deleteIndex(String blogId) throws Exception {
+		IndexWriter writer = getWriter();
+		writer.deleteDocuments(new Term("id", blogId));
+		writer.forceMergeDeletes();//强制删除
+		writer.commit();
+		writer.close();
+	}
 	
 
 }

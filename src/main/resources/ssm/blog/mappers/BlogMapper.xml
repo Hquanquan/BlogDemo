@@ -102,6 +102,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM t_blog WHERE id=#{id}
 	</select>
 	
+	<!-- //根据id删除博客
+	public Integer deleteBlog(Integer id); -->
+	<delete id="deleteBlog" parameterType="Integer">
+		delete from t_blog where id=#{id}
+	</delete>
+	
 	
 
 </mapper> 
