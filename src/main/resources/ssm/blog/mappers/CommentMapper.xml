@@ -14,8 +14,63 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</association>
 	</resultMap>
 	
+	<!-- //	更新评论状态（审核评论）
+	public Integer update(Comment comment);
+	 -->
+	 <update id="update" parameterType="Comment">
+		update t_comment
+		<set>
+			<if test="state!=null">
+				state=#{state}
+			</if>
+		</set>
+		where id=#{id}
+	</update>
+	 
+	 
+	<!-- 
+	//删除评论（可批量删除）
+	public Integer deleteComment(Integer id);
+	 -->
+	 <delete id="deleteComment" parameterType="Integer">
+		delete from t_comment where id=#{id}
+	</delete>
 	
-	<!--  public Integer deleteCommentByBlogId(Integer blogId);-->
+	<!-- 
+	//获取总记录数
+	public Long getTotal(Map<String, Object> map);
+	 -->
+	 <select id="getTotal" parameterType="Map" resultType="Long">
+		SELECT COUNT(*) FROM t_comment
+		<where>
+		 	<if test="state!=null">
+				and state=#{state}
+			</if>
+		 </where>
+	</select>
+	
+	
+	<!-- //	获取评论信息
+	public List<Comment> getCommentData(Map<String, Object> map); -->
+	
+	<select id="getCommentData" parameterType="Map"	resultMap="CommentResult">
+		SELECT * FROM t_comment 
+		<where>
+			<if test="blogId!=null">
+				and blog_id=#{blogId}
+			</if>
+			<if test="state!=null">
+				and state=#{state}
+			</if>
+		</where>
+		ORDER BY commentDate DESC
+		<if test="start!=null and pageSize!=null">
+		 	limit #{start},#{pageSize}
+		 </if>
+	</select>
+	
+	<!-- 通过blogId 删除评论
+	 public Integer deleteCommentByBlogId(Integer blogId);-->
 	<delete id="deleteCommentByBlogId" parameterType="Integer">
 		delete from t_comment where blog_id=#{id}
 	</delete>

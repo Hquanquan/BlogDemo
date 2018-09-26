@@ -49,7 +49,6 @@ public class BlogAdminController {
 	public String findById(
 			@RequestParam(value="id", required=false)String id,
 			HttpServletResponse response) throws Exception {
-		System.out.println("findById");
 		Blog blog = blogService.findById(Integer.parseInt(id));
 		JSONObject result = JSONObject.fromObject(blog);
 		ResponseUtil.write(response, result);
@@ -118,13 +117,14 @@ public class BlogAdminController {
 		ResponseUtil.write(response, result);
 		return null;
 	}
+	
+	
 	/**博客信息删除
 	 * @param ids
 	 * @param response
 	 * @return
 	 * @throws Exception
 	 */
-	
 	@RequestMapping("/delete")
 	public String deleteBlog(
 			@RequestParam(value="ids", required=false)String ids,
