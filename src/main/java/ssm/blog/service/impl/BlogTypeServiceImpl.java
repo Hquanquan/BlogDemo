@@ -1,4 +1,4 @@
-package ssm.blog.service;
+package ssm.blog.service.impl;
 
 import java.util.List;
 import java.util.Map;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import ssm.blog.dao.BlogTypeDao;
 import ssm.blog.entity.BlogType;
-import ssm.blog.entity.BlogTypeService;
+import ssm.blog.service.BlogTypeService;
 
 @Service("blogTypeService")
 public class BlogTypeServiceImpl implements BlogTypeService{
@@ -18,7 +18,7 @@ public class BlogTypeServiceImpl implements BlogTypeService{
 
 	@Override
 	public List<BlogType> getBlogTypeData() {
-		return null;
+		return blogTypeDao.getBlogTypeData();
 	}
 
 	@Override
@@ -26,9 +26,10 @@ public class BlogTypeServiceImpl implements BlogTypeService{
 		return blogTypeDao.listBlogType(map);
 	}
 
+	
+	
 	@Override
 	public Long getTotal(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -44,7 +45,6 @@ public class BlogTypeServiceImpl implements BlogTypeService{
 
 	@Override
 	public Integer deleteBlogType(Integer id) {
-		// TODO Auto-generated method stub
 		return blogTypeDao.deleteBlogType(id);
 	}
 

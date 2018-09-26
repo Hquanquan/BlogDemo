@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ssm.blog.entity.BlogType;
-import ssm.blog.entity.BlogTypeService;
 import ssm.blog.entity.PageBean;
 import ssm.blog.service.BlogService;
+import ssm.blog.service.BlogTypeService;
 import ssm.blog.util.ResponseUtil;
 
 

@@ -1,7 +1,9 @@
-package ssm.blog.entity;
+package ssm.blog.service;
 
 import java.util.List;
 import java.util.Map;
+
+import ssm.blog.entity.BlogType;
 
 public interface BlogTypeService {
 
