@@ -61,36 +61,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	
-	<!-- 
-	
-	<update id="update" parameterType="Blog">
-		update t_blog
-		<set>
+	<!--public List<Blog> listBlog(Map<String, Object> map);-->
+	<select id="listBlog" parameterType="Map" resultMap="BlogResult">
+		select * from t_blog
+		<where>
 			<if test="title!=null and title!=''">
-		 		title=#{title},
-		 	</if>
-		 	<if test="summary!=null and summary!=''">
-		 		summary=#{summary},
-		 	</if>
-		 	<if test="content!=null and content!=''">
-		 		content=#{content},
-		 	</if>
-		 	<if test="blogType.id!=null">
-				type_id=#{blogType.id},
+				and title like #{title}
 			</if>
-			<if test="clickHit!=null">
-				clickHit=#{clickHit},
+			<if test="typeId!=null and typeId!=''">
+				and type_id=#{typeId}
 			</if>
-			<if test="replyHit!=null">
-				replyHit=#{replyHit},
+			<if test="releaseDateStr!=null and releaseDateStr!=''">
+				and DATE_FORMAT(releaseDate,'%Y年%m月')=#{releaseDateStr}
 			</if>
-			<if test="keyWord!=null and keyWord!=''">
-		 		keyWord=#{keyWord},
+		</where>
+		ORDER BY releaseDate DESC
+		<if test="start!=null and pageSize!=null">
+		 	  limit #{start},#{pageSize}
+		</if>
+	</select>
+	  
+	<!--   public Long getTotal(Map<String, Object> map); -->
+	<select id="getTotal" parameterType="Map" resultType="Long">
+		select count(*) from t_blog
+		<where>
+			<if test="title!=null and title!=''">
+				and title like #{title}
+			</if>
+			<if test="typeId!=null and typeId!=''">
+		 		and type_id=#{typeId}
 		 	</if>
-		</set>
-		where id=#{id}
-	</update>
-	 -->
+		 	<if test="releaseDateStr!=null and releaseDateStr!=''">
+		 		and DATE_FORMAT(releaseDate,'%Y年%m月')=#{releaseDateStr}
+		 	</if>
+		</where>
+	</select>
+	
+	<!-- 	public Blog findById(Integer id); -->
+	<select id="findById" parameterType="Integer" resultMap="BlogResult">
+		SELECT * FROM t_blog WHERE id=#{id}
+	</select>
+	
 	
 
 </mapper> 

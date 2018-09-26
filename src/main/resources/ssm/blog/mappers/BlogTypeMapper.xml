@@ -26,6 +26,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY t2.orderNum 
 	</select>
 	
+	<!-- // 根据id查找博客类型信息
+	public BlogType findById(Integer id); -->
 	<select id="findById" parameterType="Integer" resultMap="BlogTypeResult">
 		SELECT * FROM t_blogtype WHERE id=#{id}
 	</select>
@@ -38,6 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 </if>
 	</select>
 	
+		<!-- public Long getTotal(Map<String, Object> map); -->
 	<select id="getTotal" parameterType="Map" resultType="Long">
 		SELECT COUNT(*) FROM t_blogtype
 	</select>

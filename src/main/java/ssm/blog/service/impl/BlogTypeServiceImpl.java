@@ -30,7 +30,7 @@ public class BlogTypeServiceImpl implements BlogTypeService{
 	
 	@Override
 	public Long getTotal(Map<String, Object> map) {
-		return null;
+		return blogTypeDao.getTotal(map);
 	}
 
 	@Override
