@@ -12,5 +12,8 @@ public interface BlogService {
 
 	public Integer update(Blog blog);
 
+	// 根据id获取博客
+	public Blog findById(Integer id);
+
 
 }

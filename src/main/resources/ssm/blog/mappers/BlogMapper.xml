@@ -24,9 +24,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- // 添加博客
 	public Integer addBlog(Blog blog); 
-	<insert id="addBlog" parameterType="Blog" keyProperty="id" useGeneratedKeys="true">
-		INSERT INTO t_blog VALUES(null,#{title},#{summary},now(),0,0,#{content},#{keyWord},#{blogType.id})
-	</insert>
 	-->
 	<insert id="addBlog" parameterType="Blog" keyProperty="id" useGeneratedKeys="true">
 		INSERT INTO t_blog VALUES(null,#{title},#{summary},now(),0,0,#{content},#{keyWord},#{blogType.id})

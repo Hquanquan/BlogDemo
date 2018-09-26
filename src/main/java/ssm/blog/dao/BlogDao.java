@@ -12,6 +12,8 @@ public interface BlogDao {
 
 	// 更新博客信息
 	public Integer update(Blog blog);
+
+	public Blog findById(Integer id);
 	
 
 	

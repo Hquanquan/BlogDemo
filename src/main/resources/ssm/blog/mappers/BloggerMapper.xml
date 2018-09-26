@@ -13,11 +13,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="sign" column="sign"/>
 		<result property="imagename" column="imagename"/>
 	</resultMap>
+	
 	<!-- 通过用户名查询博主
 	public Blogger getByUsername(String username); -->
 	<select id="getByUsername" parameterType="String" resultMap="BloggerResult">
 		SELECT * FROM t_blogger WHERE username=#{username}
 	</select>
+	
 	<!-- 获取博主信息
 	public Blogger getBloggerData(); -->
 	<select id="getBloggerData" resultMap="BloggerResult">
