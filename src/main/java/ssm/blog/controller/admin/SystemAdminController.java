@@ -13,10 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
+import ssm.blog.entity.Blog;
 import ssm.blog.entity.BlogType;
 import ssm.blog.entity.Blogger;
+import ssm.blog.entity.Link;
+import ssm.blog.service.BlogService;
 import ssm.blog.service.BlogTypeService;
 import ssm.blog.service.BloggerService;
+import ssm.blog.service.LinkService;
 import ssm.blog.util.ResponseUtil;
 
 @Controller
@@ -29,12 +33,18 @@ public class SystemAdminController {
 	@Autowired
 	private BloggerService bloggerService;
 	
+	@Autowired
+	private LinkService linkService;
+	
+	@Autowired
+	private BlogService  blogService;
+	
 	// 刷新系统缓存
 	@RequestMapping("/refreshSystemCache")
 	public String refreshSystemCache(HttpServletRequest request,
 			HttpServletResponse response)throws Exception{
 		
-
+//		ServletContext application=(ServletContext) request.getSession();
 		ServletContext application = RequestContextUtils.getWebApplicationContext(request).getServletContext();
 		
 		// 获取博主信息
@@ -46,6 +56,15 @@ public class SystemAdminController {
 		// 获取博客类别信息
 		List<BlogType> blogTypeList = blogTypeService.getBlogTypeData();
 		application.setAttribute("blogTypeList", blogTypeList);
+		
+		// 获取友情链接信息
+		List<Link> linkList = linkService.getLinkData(); 
+		application.setAttribute("linkList", linkList);
+		
+		// 获取博客信息，按照时间分类的
+		List<Blog> blogTimeList = blogService.getBlogData();
+		application.setAttribute("blogTimeList", blogTimeList);
+
 		
 		JSONObject result = new JSONObject();
 		result.put("success", true);

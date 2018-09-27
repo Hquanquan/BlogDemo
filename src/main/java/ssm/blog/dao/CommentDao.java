@@ -22,4 +22,7 @@ public interface CommentDao {
 	//	更新评论状态（审核评论）
 	public Integer update(Comment comment);
 
+	//添加评论
+	public Integer addComment(Comment comment);
+
 }

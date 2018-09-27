@@ -14,6 +14,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</association>
 	</resultMap>
 	
+	
+	<!-- //添加评论
+	public Integer addComment(Comment comment); -->
+	<insert id="addComment" parameterType="Comment">
+		INSERT INTO t_comment VALUES(NULL,#{userIp},#{content},now(),0,#{blog.id})
+	</insert>
+	
+	
 	<!-- //	更新评论状态（审核评论）
 	public Integer update(Comment comment);
 	 -->

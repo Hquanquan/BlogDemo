@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ssm.blog.dao.LinkDao">
+
+	<resultMap type="Link" id="LinkResult">
+		<id property="id" column="id"/>
+		<result property="linkname" column="linkname"/>
+		<result property="linkurl" column="linkurl"/>
+		<result property="orderNum" column="orderNum"/>
+	</resultMap>
+	
+	<!-- 	//获取友情链接信息(在系统缓存中)
+	public List<Link> getLinkData(); -->
+	<select id="getLinkData" resultMap="LinkResult">
+		SELECT * FROM t_link ORDER BY orderNum
+	</select>
+	
+	<!-- //获取友情链接信息
+	public List<Link> listLinkData(Map<String, Object> map); -->
+	<select id="listLinkData" parameterType="Map" resultMap="LinkResult">
+		SELECT * FROM t_link ORDER BY orderNum
+		<if test="start!=null and pageSize!=null">
+		 	limit #{start},#{pageSize}
+		 </if>
+	</select>
+	
+	
+	<!-- //获取友情链接总记录数
+	public Long getTotal(Map<String, Object> map); -->
+	<select id="getTotal" parameterType="Map" resultType="Long">
+		SELECT COUNT(*) FROM t_link
+	</select>
+	
+	<!-- //	添加友情链接
+	public Integer addLink(Link link); -->
+	<insert id="addLink" parameterType="Link" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO t_link VALUES(null,#{linkname},#{linkurl},#{orderNum})
+	</insert>
+	
+	<!-- //根据id 删除友情链接
+	public Integer deleteLink(int id); -->
+	<delete id="deleteLink" parameterType="Integer">
+		delete from t_link where id=#{id}
+	</delete>
+	
+	<!-- //更新友情链接
+	public Integer updateLink(Link link); -->
+	<update id="updateLink" parameterType="Link">
+		update t_link
+		<set>
+			<if test="linkname!=null and linkname!=''">
+		 		linkname=#{linkname},
+		 	</if>
+		 	<if test="linkurl!=null and linkurl!=''">
+		 		linkurl=#{linkurl},
+		 	</if>
+		 	<if test="orderNum!=null">
+		 		orderNum=#{orderNum},
+		 	</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	
+	
+</mapper> 

@@ -51,4 +51,20 @@ public class BlogServiceImpl implements BlogService{
 		return blogDao.deleteBlog(id);
 	}
 
+	@Override
+	public List<Blog> getBlogData() {
+		return blogDao.getBlogData();
+	}
+
+	// 获取上前一篇博客信息
+	@Override
+	public Blog getPrevBlog(Integer id) {
+		return blogDao.getPrevBlog(id);
+	}
+
+	@Override
+	public Blog getNextBlog(Integer id) {
+		return blogDao.getNextBlog(id);
+	}
+
 }

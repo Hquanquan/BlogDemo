@@ -25,6 +25,15 @@ public interface BlogService {
 	// 删除博客信息
 	public Integer deleteBlog(Integer id);
 
+	// 获取博客信息，按照时间分类的
+	public List<Blog> getBlogData();
+
+	// 获取前一篇博客信息
+	public Blog getPrevBlog(Integer id);
+
+	// 获取后一篇博客信息
+	public Blog getNextBlog(Integer id);
+
 
 
 	

@@ -18,6 +18,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</association>
 	</resultMap>
 	
+	
+	<!-- //获取前一篇blog信息
+	public Blog getPrevBlog(Integer id); -->
+	<select id="getPrevBlog" parameterType="Integer" resultMap="BlogResult">
+		SELECT * FROM t_blog WHERE id&lt;#{id} ORDER BY id DESC LIMIT 1
+	</select>
+	
+	
+	<!-- 	// 获取后一篇博客信息
+	public Blog getNextBlog(Integer id); -->
+	<select id="getNextBlog" parameterType="Integer" resultMap="BlogResult">
+		SELECT * FROM t_blog WHERE id&gt;#{id} ORDER BY id ASC LIMIT 1
+	</select>
+	
+	
+	
+	<!--// 获取博客信息，按照时间分类的
+		public List<Blog> getBlogData();  
+	-->
+	<select id="getBlogData" resultMap="BlogResult">
+		  SELECT 
+		    DATE_FORMAT(releaseDate,'%Y年%m月') AS releaseDateStr,
+		    COUNT(*) AS blogCount
+		  FROM
+		    t_blog 
+		  GROUP BY DATE_FORMAT(releaseDate,'%Y年%m月')
+		  ORDER BY releaseDate DESC
+	</select>
+	
+	
+	<!-- //通过TypeId 博客类型查询博客blog信息
+		public Integer getBlogByTypeId(Integer typeId); 
+	-->
 	<select id="getBlogByTypeId" parameterType="Integer" resultType="Integer">
 		select count(*) from t_blog where type_id=#{typeId}
 	</select>

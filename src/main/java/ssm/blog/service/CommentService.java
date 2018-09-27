@@ -22,4 +22,7 @@ public interface CommentService {
 	// 修改评论信息
 	public Integer update(Comment comment);
 
+	//添加评论
+	public Integer addComment(Comment comment);
+
 }
